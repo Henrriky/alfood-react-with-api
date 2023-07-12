@@ -12,7 +12,7 @@ const ListaRestaurantes = () => {
 
   useEffect(() => {
     //obter restaurantes
-    axios.get<IPaginacao<IRestaurante>>('http://localhost:8000/api/v1/restaurantes/') 
+    axios.get<IPaginacao<IRestaurante>>('http://localhost:8000/api/v1/restaurantes/')
       .then(resposta => {
         setRestaurantes(resposta.data.results);
         setProximaPagina(resposta.data.next);
@@ -33,15 +33,17 @@ const ListaRestaurantes = () => {
       });
   }
 
-  return (<section className={style.ListaRestaurantes}>
-    <h1>Os restaurantes mais <em>bacanas</em>!</h1>
-    {restaurantes?.map(item => <Restaurante restaurante={item} key={item.id} />)}
-    { proximaPagina 
-      && 
-      <button onClick={() => verMais()}>
-        Ver Mais
-      </button>}
-  </section>)
+  return (
+    <section className={style.ListaRestaurantes}>
+      <h1>Os restaurantes mais <em>bacanas</em>!</h1>
+      {restaurantes?.map(restaurante => <Restaurante restaurante={restaurante} key={restaurante.id} />)}
+      {proximaPagina
+        &&
+        <button onClick={() => verMais()}>
+          Ver Mais
+        </button>}
+    </section>
+  )
 }
 
 export default ListaRestaurantes
