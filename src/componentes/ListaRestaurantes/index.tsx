@@ -9,7 +9,7 @@ import Restaurante from './Restaurante';
 
 import axios, { AxiosRequestConfig } from 'axios';
 
-import { Button, TextField } from '@mui/material';
+import { Button, MenuItem, Select, TextField } from '@mui/material';
 
 interface IParametrosBusca {
   ordering?: string
@@ -21,8 +21,9 @@ const ListaRestaurantes = () => {
   const [restaurantes, setRestaurantes] = useState<Array<IRestaurante>>([]);
   const [proximaPagina, setProximaPagina] = useState('');
   const [paginaAnterior, setPaginaAnterior] = useState('');
-  
+
   const [busca, setBusca] = useState('');
+  const [ordenacao, setOrdenacao] = useState('');
 
   useEffect(() => {
     carregarDados('http://localhost:8000/api/v1/restaurantes/');
@@ -48,26 +49,47 @@ const ListaRestaurantes = () => {
 
       } as IParametrosBusca
     }
+
     if (busca) {
       opcoes.params.search = busca
     }
+
+    if (ordenacao) {
+      opcoes.params.ordering = ordenacao
+    }
+
+
+
     carregarDados('http://localhost:8000/api/v1/restaurantes/', opcoes)
   }
-
 
   return (
     <section className={style.ListaRestaurantes}>
       <h1>Os restaurantes mais <em>bacanas</em>!</h1>
       <form onSubmit={buscar}>
-            <TextField 
-                label="Nome do restaurante" 
-                variant="standard" 
-                placeholder='Pesquisar restaurante'
-                value={busca}
-                onChange={evento => setBusca(evento.target.value)} 
-            />
-            <Button type="submit" variant="outlined">Buscar</Button>
-        </form>
+        <TextField
+          label="Nome do restaurante"
+          variant="standard"
+          placeholder='Pesquisar restaurante'
+          value={busca}
+          onChange={evento => setBusca(evento.target.value)}
+        />
+        <Button type="submit" variant="outlined">Buscar</Button>
+        <Select
+          sx={{ marginLeft: 5}}
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={ordenacao}
+          onChange={event => setOrdenacao(event.target.value)}
+          label="Ordenação"
+        >
+          <MenuItem value="">
+            Ordenar por:
+          </MenuItem>
+          <MenuItem value="nome">Nome</MenuItem>
+          <MenuItem value="id">ID</MenuItem>
+        </Select>
+      </form>
       {restaurantes?.map(restaurante => <Restaurante restaurante={restaurante} key={restaurante.id} />)}
       <div className={style.ListaRestaurantes__control}>
         <Button variant='outlined' onClick={() => carregarDados(paginaAnterior)} disabled={!paginaAnterior}>

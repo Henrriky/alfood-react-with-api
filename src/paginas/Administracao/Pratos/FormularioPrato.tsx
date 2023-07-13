@@ -6,7 +6,7 @@ import IRestaurante from "../../../interfaces/IRestaurante";
 import http from "../../../http";
 import AppBarLayout from "../../../componentes/PaginaBaseAdmin/AppBarLayout";
 
-export default function FormularioRestaurante() {
+export default function FormularioPrato() {
 
     const parametros = useParams();
 

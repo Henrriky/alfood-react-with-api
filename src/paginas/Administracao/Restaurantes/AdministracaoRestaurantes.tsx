@@ -27,7 +27,7 @@ export default function AdministracaoRestaurantes() {
   }
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table>
         <TableHead>
           <TableRow>
