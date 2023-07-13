@@ -1,4 +1,14 @@
 .ListaRestaurantes {
   margin-top: 1.5rem;
   padding: 2rem;
+  &__control {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+
+  }
 }
+
+

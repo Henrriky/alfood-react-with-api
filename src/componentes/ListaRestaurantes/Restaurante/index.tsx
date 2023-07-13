@@ -1,10 +1,10 @@
 import axios from 'axios';
 import IRestaurante from '../../../interfaces/IRestaurante';
+import IPaginacao from '../../../interfaces/IPaginacao';
 import Prato from '../Prato';
 import estilos from './Restaurante.module.scss';
 import IPrato from '../../../interfaces/IPrato';
 import { useEffect, useState } from 'react';
-import { IPaginacao } from '../../../interfaces/IPaginacao';
 
 interface RestauranteProps {
   restaurante: IRestaurante
