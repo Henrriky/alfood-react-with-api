@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import IPratos from "../../../interfaces/IPrato"
+import IPrato from "../../../interfaces/IPrato"
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { Link } from "react-router-dom";
 import http from "../../../http";
 
 export default function AdministracaoPratos() {
 
-  const [pratos, setPratos] = useState<IPratos[]>([]);
+  const [pratos, setPratos] = useState<IPrato[]>([]);
 
   useEffect(() => {
-    http.get<IPratos[]>('pratos/')
+    http.get<IPrato[]>('pratos/')
       .then(resposta => setPratos(resposta.data))
       .catch(error => console.log(error))
   }, [])
 
-  const excluirPrato = (pratoAhSerExcluido: IPratos) => {
+  const excluirPrato = (pratoAhSerExcluido: IPrato) => {
 
     const { id } = pratoAhSerExcluido;
 
